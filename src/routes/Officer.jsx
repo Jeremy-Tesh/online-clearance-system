@@ -6,13 +6,14 @@ import {
   Switch,
   Redirect,
 } from "react-router-dom";
-import Dashboard from "../pages/Admin-page/Dashboard/Dashboard";
-import Property from "../components/property/property";
 
-const AdminPage = () => {
+import Property from "../components/property/property";
+import ManageProperty from "../pages/OfficerPage/ManageProperty";
+
+const Officer = () => {
   return (
     <Router>
-      <Layout>
+      <Layout obj={{ a: "name" }}>
         <Switch>
           <Route exact path="/property" component={Property} />
           <Redirect to="/" />
@@ -22,4 +23,4 @@ const AdminPage = () => {
   );
 };
 
-export default AdminPage;
+export default Officer;

@@ -3,12 +3,12 @@ import * as FaIcons from "react-icons/fa";
 import * as AiIcons from "react-icons/ai";
 import { Link, useHistory } from "react-router-dom";
 import { Alert } from "react-bootstrap";
-import { SidebarData } from "./SidebarData";
+import SidebarData from "./SidebarData";
 import "./Style.css";
 import { IconContext } from "react-icons/lib";
 import { useAuth } from "../../contexts/AuthContext";
 
-function Navbar() {
+function Navbar({ navItems }) {
   const [sidebar, setSidebar] = useState(false);
   const showSidebar = () => setSidebar(!sidebar);
   const [error, setError] = useState("");
@@ -20,7 +20,7 @@ function Navbar() {
 
     try {
       await logout();
-      history.push("/");
+      history.push("/login");
     } catch {
       setError("Failed to log out");
     }
@@ -34,7 +34,7 @@ function Navbar() {
             <FaIcons.FaBars onClick={showSidebar} />
           </Link>
           {error && <Alert variant="danger">{error}</Alert>}
-          <p>Officer Dashboard</p>
+          <p>title</p>
           <strong>Hello {currentUser.email}</strong>
           <button
             type="button"
@@ -52,16 +52,28 @@ function Navbar() {
                 <AiIcons.AiOutlineClose />
               </Link>
             </li>
-            {SidebarData.map((item, index) => {
+
+            {navItems.map((list, id) => {
               return (
-                <li key={index} className={item.cName}>
-                  <Link className="test" to={item.path}>
-                    {item.icon}
-                    <span>{item.title}</span>
+                <li key={id} className={list.cName}>
+                  <Link className="test" to={list.path}>
+                    {list.icon}
+                    <span>{list.name}</span>
                   </Link>
                 </li>
               );
             })}
+
+            {/* {SidebarData.map((item, id) => {
+              return (
+                <li key={id} className={item.cName}>
+                  <Link className="test" to={item.path}>
+                    {item.icon}
+                    <span>{list.Student.name}</span>
+                  </Link>
+                </li>
+              );
+            })} */}
           </ul>
         </nav>
       </IconContext.Provider>

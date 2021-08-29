@@ -27,7 +27,7 @@ const ProgressBar = (props) => {
 
   return (
     <>
-      <p>Progress Bar</p>
+      <p>Progress Barrr</p>
       <svg className="svg" width={size} height={size}>
         <circle
           className="svg-circle-bg"

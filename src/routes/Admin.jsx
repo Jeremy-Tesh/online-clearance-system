@@ -6,25 +6,22 @@ import {
   Switch,
   Redirect,
 } from "react-router-dom";
-import Dashboard from "../pages/Admin-page/Dashboard/Dashboard";
-import Login from "./Login";
-import Property from "../components/property/property";
-import PrivateRoute from "./PrivateRoute";
-import { AuthProvider } from "../contexts/AuthContext";
-import IndexRoute from ".";
+import Dashboard from "../pages/AdminPage/Dashboard";
+import Profile from "../pages/AdminPage/Profile";
+// import AdminPage from "../pages/AdminPage/AdminPage";
 
-const AdminPage = () => {
+const Admin = () => {
   return (
     <Router>
-      <p>haloooo</p>
-      <AuthProvider>
+      <Layout>
         <Switch>
-          <Route exact path="/" component={Login} />
-          <Route path="/IndexRoute" component={IndexRoute} />
+          <Route exact path="/dashboard" component={Dashboard} />
+          <Route exact path="/" render={() => <Redirect to="/dashboard" />} />
+          <Route exact path="/profile" component={Profile} />
         </Switch>
-      </AuthProvider>
+      </Layout>
     </Router>
   );
 };
 
-export default AdminPage;
+export default Admin;

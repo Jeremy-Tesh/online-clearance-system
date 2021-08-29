@@ -12,7 +12,7 @@ const AdminPage = () => {
         <AccountCircleIcon />
         <DashboardIcon />
         <PeopleOutlineIcon />
-        <p>haloooooo</p>
+        <p>ADMIN PAGE</p>
       </Layout>
     </>
   );

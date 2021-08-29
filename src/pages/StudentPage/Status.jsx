@@ -1,14 +1,8 @@
 import React, { useState } from "react";
-import "./StudentPage.css";
-
-// import AccountCircleIcon from "@material-ui/icons/AccountCircle";
-// import DashboardIcon from "@material-ui/icons/Dashboard";
-// import PeopleOutlineIcon from "@material-ui/icons/PeopleOutline";
 
 import ProgressBar from "../../components/ProgressBar/ProgressBar";
-import Layout from "../../components/Layout";
 
-const StudentPage = () => {
+const Status = () => {
   const [progress, setProgress] = useState(0);
   const [color, setColor] = useState("");
   const colorArray = [
@@ -48,29 +42,28 @@ const StudentPage = () => {
   };
 
   return (
-    <Layout>
-      <div className="app">
-        <div className="app-header">
-          <h1>SVG Circle Progress</h1>
-          <ProgressBar
-            progress={progress}
-            size={500}
-            strokeWidth={15}
-            circleOneStroke="#d9edfe"
-            circleTwoStroke={color}
+    <div className="app">
+      <div className="app-header">
+        <h1>SVG Circle Progress</h1>
+        <ProgressBar
+          progress={progress}
+          size={500}
+          strokeWidth={15}
+          circleOneStroke="#d9edfe"
+          circleTwoStroke={color}
+        />
+        <p>
+          <input
+            type="number"
+            name="percent"
+            placeholder="Add Progress Value"
+            onChange={onChange}
           />
-          <p>
-            <input
-              type="number"
-              name="percent"
-              placeholder="Add Progress Value"
-              onChange={onChange}
-            />
-          </p>
-          <button onClick={randomProgressValue}>Random</button>
-        </div>
+        </p>
+        <button onClick={randomProgressValue}>Random</button>
       </div>
-    </Layout>
+    </div>
   );
 };
-export default StudentPage;
+
+export default Status;
