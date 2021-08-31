@@ -8,6 +8,8 @@ const PropertyForm = (props) => {
     email: "",
     department: "",
     year: "",
+    property: "",
+    amount: "",
   };
   var [values, setValues] = useState(initialFieldValues);
 
@@ -71,28 +73,44 @@ const PropertyForm = (props) => {
             onChange={handleInputChange}
           />
         </div>
+        <div className="dropdown">
+          <button
+            className="btn btn-secondary dropdown-toggle"
+            type="button"
+            id="dropdownMenuButton"
+            data-toggle="dropdown"
+            aria-haspopup="true"
+            aria-expanded="false"
+            data-bs-toggle="dropdown"
+          >
+            Dropdown button
+          </button>
+          <div className="dropdown-menu" aria-labelledby="dropdownMenuButton">
+            <a className="dropdown-item" href="#">
+              Action
+            </a>
+            <a className="dropdown-item" href="#">
+              Another action
+            </a>
+            <a className="dropdown-item" href="#">
+              Something else here
+            </a>
+          </div>
+        </div>
       </div>
-      <div className="dropdown">
-        <button
-          className="btn btn-secondary dropdown-toggle"
-          type="button"
-          id="dropdownMenuButton1"
-          data-bs-toggle="dropdown"
-          aria-expanded="false"
-        >
-          Dropdown button
-        </button>
-        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-          <li>
-            <option className="dropdown-item">Action</option>
-          </li>
-          <li>
-            <option className="dropdown-item">Another action</option>
-          </li>
-          <li>
-            <option className="dropdown-item">Something else here</option>
-          </li>
-        </ul>
+      <div className="form-group input-group col-md-6">
+        <div className="input-group-prepend">
+          <div className="input-group-text">
+            <i className="fas fa-envelope"></i>
+          </div>
+        </div>
+        <input
+          className="form-control"
+          placeholder="Property"
+          name="property"
+          value={values.property}
+          onChange={handleInputChange}
+        />
       </div>
 
       <div className="form-group">

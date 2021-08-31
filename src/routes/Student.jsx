@@ -8,22 +8,21 @@ import {
 } from "react-router-dom";
 import Dashboard from "../pages/StudentPage/Dashboard";
 import Profile from "../pages/StudentPage/Profile";
-import Status from "../pages/StudentPage/Status";
+import Progress from "../components/ProgressBar/Progress";
 // import StudentPage from "../pages/StudentPage/AdminPage";
 
-const Admin = () => {
+const Student = () => {
   return (
     <Router>
       <Layout>
         <Switch>
           <Route exact path="/dashboard" component={Dashboard} />
-          <Route exact path="/" render={() => <Redirect to="/dashboard" />} />
           <Route exact path="/profile" component={Profile} />
-          <Route exact path="/progress" component={Status} />
+          <Route exact path="/progress" component={Progress} />
         </Switch>
       </Layout>
     </Router>
   );
 };
 
-export default Admin;
+export default Student;

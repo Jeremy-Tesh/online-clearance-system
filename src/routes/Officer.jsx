@@ -8,12 +8,11 @@ import {
 } from "react-router-dom";
 
 import Property from "../components/property/property";
-import ManageProperty from "../pages/OfficerPage/ManageProperty";
 
 const Officer = () => {
   return (
     <Router>
-      <Layout obj={{ a: "name" }}>
+      <Layout>
         <Switch>
           <Route exact path="/property" component={Property} />
           <Redirect to="/" />

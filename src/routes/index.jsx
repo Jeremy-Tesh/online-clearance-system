@@ -1,25 +1,43 @@
+import React, { useState } from "react";
 import Officer from "./Officer";
 import Staff from "./Staff";
 import Student from "./Student";
 import Admin from "./Admin";
-
+import Layout from "../components/Layout/index";
 import { useAuth } from "../contexts/AuthContext";
 
 const IndexRoute = () => {
   const {
     currentUser: { email },
   } = useAuth();
+  const role = "";
 
   const renderAppBasedOnRole = () => {
     switch (email) {
       case "none":
-        return <Staff />;
+        return (
+          <div>
+            role="staff"
+            <Staff />
+            <Layout role={role} />
+          </div>
+        );
       case "jermitesh20@gmail.com":
-        return <Student />;
+        return (
+          <div>
+            <Student role="student" />
+          </div>
+        );
       case "officer@officer.com":
-        return <Officer />;
+        return (
+          <div>
+            role="officer"
+            <Staff />
+            <Layout role={role} />
+          </div>
+        );
       case "e@gmail.com":
-        return <Admin />;
+        return <Officer />;
       default:
         return null;
     }

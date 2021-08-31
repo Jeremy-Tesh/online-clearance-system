@@ -1,9 +1,10 @@
 import React, { useState } from "react";
 
-import ProgressBar from "../../components/ProgressBar/ProgressBar";
+import ProgressBar from "./ProgressBar";
+import "./Progress.css";
 
-const Status = () => {
-  const [progress, setProgress] = useState(0);
+const Progress = ({ x }) => {
+  const [progress, setProgress] = useState(x);
   const [color, setColor] = useState("");
   const colorArray = [
     "#7ea9e1",
@@ -18,12 +19,12 @@ const Status = () => {
     return colorArray[Math.floor(Math.random() * colorArray.length)];
   };
 
-  const randomProgressValue = () => {
-    const progressValue = Math.floor(Math.random() * 101);
-    setProgress(progressValue);
-    const randomProgressColor = randomColor();
-    setColor(randomProgressColor);
-  };
+  // const randomProgressValue = () => {
+  //   const progressValue = Math.floor(Math.random() * 101);
+  //   setProgress(progressValue);
+  //   const randomProgressColor = randomColor();
+  //   setColor(randomProgressColor);
+  // };
 
   const onChange = (e) => {
     if (e.target.value) {
@@ -44,26 +45,19 @@ const Status = () => {
   return (
     <div className="app">
       <div className="app-header">
-        <h1>SVG Circle Progress</h1>
+        <h1>Clearance progress</h1>
         <ProgressBar
           progress={progress}
-          size={500}
+          size={200}
           strokeWidth={15}
-          circleOneStroke="#d9edfe"
+          circleOneStroke="black"
           circleTwoStroke={color}
         />
-        <p>
-          <input
-            type="number"
-            name="percent"
-            placeholder="Add Progress Value"
-            onChange={onChange}
-          />
-        </p>
-        <button onClick={randomProgressValue}>Random</button>
+
+        {/* <button onClick={randomProgressValue}>Random</button> */}
       </div>
     </div>
   );
 };
 
-export default Status;
+export default Progress;

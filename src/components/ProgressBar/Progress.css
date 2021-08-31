@@ -1,0 +1,56 @@
+.app {
+  text-align: center;
+}
+
+.app-header {
+  background-color: #e1e3e7;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+button {
+  background: #428bca;
+  color: #fff;
+  font-size: 20px;
+  height: 60px;
+  width: 150px;
+  line-height: 60px;
+  margin: 25px 25px;
+  text-align: center;
+  outline: none;
+}
+
+input {
+  border: 1px solid #666;
+  background: #333;
+  color: #fff !important;
+  height: 30px;
+  width: 200px;
+  outline: none !important;
+  text-align: center;
+  font-size: 16px;
+  font-weight: bold;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input[type="number"] {
+  -moz-appearance: textfield;
+}
+
+h1 {
+  margin: 0;
+  text-transform: uppercase;
+  text-shadow: 0 0 0.5em #fff;
+  font-size: 46px;
+  margin-bottom: 20px;
+}
