@@ -7,6 +7,7 @@ import SidebarData from "./SidebarData";
 import "./Style.css";
 import { IconContext } from "react-icons/lib";
 import { useAuth } from "../../contexts/AuthContext";
+import Button from "react-bootstrap/Button";
 
 function Navbar({ navItems }) {
   const [sidebar, setSidebar] = useState(false);
@@ -36,11 +37,7 @@ function Navbar({ navItems }) {
           {error && <Alert variant="danger">{error}</Alert>}
           <p>title</p>
           <strong>Hello {currentUser.email}</strong>
-          <button
-            type="button"
-            className="btn btn-light"
-            onClick={handleLogout}
-          >
+          <button type="button" onClick={handleLogout}>
             Logout
           </button>
         </div>
@@ -63,17 +60,6 @@ function Navbar({ navItems }) {
                 </li>
               );
             })}
-
-            {/* {SidebarData.map((item, id) => {
-              return (
-                <li key={id} className={item.cName}>
-                  <Link className="test" to={item.path}>
-                    {item.icon}
-                    <span>{list.Student.name}</span>
-                  </Link>
-                </li>
-              );
-            })} */}
           </ul>
         </nav>
       </IconContext.Provider>

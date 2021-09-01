@@ -22,18 +22,19 @@ const IndexRoute = () => {
             <Layout role={role} />
           </div>
         );
-      case "jermitesh20@gmail.com":
+      case "jermitesh20@gmail.com": {
+        <Layout role="student" />;
         return (
           <div>
-            <Student role="student" />
+            <Student />
           </div>
         );
+      }
       case "officer@officer.com":
         return (
           <div>
-            role="officer"
-            <Staff />
-            <Layout role={role} />
+            <Officer />
+            <Layout role="officer" />
           </div>
         );
       case "e@gmail.com":

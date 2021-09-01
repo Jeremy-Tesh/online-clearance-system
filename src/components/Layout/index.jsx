@@ -6,7 +6,7 @@ import * as GrIcons from "react-icons/gr";
 import * as IoIcons from "react-icons/io";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-const Layout = ({ children }) => {
+const Layout = ({ children, role }) => {
   const data = {
     student: [
       {

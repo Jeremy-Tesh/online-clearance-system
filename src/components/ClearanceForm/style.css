@@ -1,0 +1,14 @@
+.container {
+  display: flex;
+  align-items: center;
+  background-color: #ebebe8;
+
+  padding: 20px 50px 20px 50px;
+}
+.radio {
+  font-size: 1.25rem;
+  color: var(--color);
+}
+.form-control {
+  color: black;
+}

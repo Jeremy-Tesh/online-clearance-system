@@ -92,3 +92,14 @@ p {
   font-size: 25px;
   font-weight: bold;
 }
+button {
+  margin: 30px;
+  font-size: 18px;
+  height: 35px;
+  width: 100px;
+  border-radius: 10px;
+  border: none;
+  box-shadow: 1px 1px 0px 2px rgba (0, 0, 0, 0.3);
+  background: rgb(141, 217, 252);
+  cursor: pointer;
+}
