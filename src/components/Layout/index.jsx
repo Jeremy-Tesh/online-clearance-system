@@ -105,7 +105,7 @@ const Layout = ({ children, role }) => {
 
   return (
     <div>
-      <Navbar navItems={data.student} />
+      <Navbar navItems={data.officer} />
       <div>{children}</div>
     </div>
   );

@@ -5,12 +5,7 @@ const Dashboard = () => {
   return (
     <div>
       <div> Student Dashoard page</div>
-      <ClearanceForm
-        style={{
-          display: "flex",
-          justifyContent: "center",
-        }}
-      />
+      <ClearanceForm />
     </div>
   );
 };

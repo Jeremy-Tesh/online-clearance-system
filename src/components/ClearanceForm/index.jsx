@@ -15,6 +15,7 @@ const ClearanceForm = () => {
   const [year, setYear] = useState("");
   const [college, setCollege] = useState("Ele");
   const [reason, setReason] = useState("");
+  const [status, setStatus] = useState("Not cleared");
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -31,6 +32,7 @@ const ClearanceForm = () => {
         year: year,
         college: college,
         reason: reason,
+        status: status,
       })
       .then(() => {
         alert("Form Submitted Successfully!");
@@ -46,6 +48,7 @@ const ClearanceForm = () => {
     setDepartment("");
     setSection("");
     setYear("");
+    setStatus("Not cleared");
   };
 
   return (
@@ -86,7 +89,12 @@ const ClearanceForm = () => {
           <Row className="mb-3">
             <Form.Group as={Col}>
               <Form.Label>Email</Form.Label>
-              <Form.Control type="email" placeholder="Email" />
+              <Form.Control
+                type="email"
+                placeholder="Email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+              />
             </Form.Group>
 
             <Form.Group as={Col}>
@@ -143,6 +151,15 @@ const ClearanceForm = () => {
                 placeholder="Year"
                 value={year}
                 onChange={(e) => setYear(e.target.value)}
+              />
+            </Form.Group>
+
+            <Form.Group as={Col}>
+              <Form.Label>ID</Form.Label>
+              <Form.Control
+                placeholder="ID"
+                value={id}
+                onChange={(e) => setId(e.target.value)}
               />
             </Form.Group>
           </Row>

@@ -34,7 +34,6 @@ const IndexRoute = () => {
         return (
           <div>
             <Officer />
-            <Layout role="officer" />
           </div>
         );
       case "e@gmail.com":

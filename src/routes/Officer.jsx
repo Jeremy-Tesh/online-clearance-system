@@ -8,6 +8,7 @@ import {
 } from "react-router-dom";
 
 import Property from "../components/property/property";
+import QueueList from "../pages/OfficerPage/QueueList";
 
 const Officer = () => {
   return (
@@ -15,7 +16,7 @@ const Officer = () => {
       <Layout>
         <Switch>
           <Route exact path="/property" component={Property} />
-          <Redirect to="/" />
+          <Route exact path="/queuelist" component={QueueList} />
         </Switch>
       </Layout>
     </Router>
