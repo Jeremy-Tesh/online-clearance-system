@@ -25,7 +25,7 @@ button {
   outline: none;
 }
 
-input {
+/* input {
   border: 1px solid #666;
   background: #333;
   color: #fff !important;
@@ -35,7 +35,7 @@ input {
   text-align: center;
   font-size: 16px;
   font-weight: bold;
-}
+} */
 
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {

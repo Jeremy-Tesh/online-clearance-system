@@ -10,6 +10,7 @@ const PropertyForm = (props) => {
     year: "",
     property: "",
     amount: "",
+    office: "department",
   };
   var [values, setValues] = useState(initialFieldValues);
 

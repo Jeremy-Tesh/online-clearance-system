@@ -17,6 +17,7 @@ function QueueList() {
   var [state, setState] = useState("");
 
   const [table, setTable] = useState([]);
+
   const fetchTable = async () => {
     db.collection("students")
       .get()
@@ -24,18 +25,41 @@ function QueueList() {
         querySnapshot.forEach((doc) => {
           var data = doc.data();
           setTable((arr) => [...arr, data]);
-          console.log(table);
         });
       });
   };
+
   useEffect(() => {
     fetchTable();
   }, []);
 
   const handleClick = (id) => {
-    console.log(table[id]);
+    // let statusChangedData = table.filter((data) => data.id === id)[0];
+    // console.log(statusChangedData);
+    // statusChangedData.status = "checked";
+    // const updated = table.map((data) => {
+    //   if (data.id === id) {
+    //     return statusChangedData;
+    //   }
+    //   return data;
+    // });
+    // setTable(updated);
+    setState("clicked");
+    console.log("hook");
   };
+  useEffect(() => {
+    handleClick();
+  }, []);
 
+  const a = { x: 1, y: 2 };
+
+  const b = a.x;
+  console.log(b);
+  console.log(b);
+  console.log(b);
+  console.log(b);
+  console.log(b);
+  console.log(b);
   return (
     <div className="queue_list">
       <FontAwesomeIcon icon={faHome} />
@@ -81,7 +105,7 @@ function QueueList() {
                       {table[id].status}
                       <a
                         className="btn text-primary"
-                        onClick={() => handleClick(id)}
+                        onClick={() => handleClick(table[id].id)}
                       >
                         <i className="fas fa-check-circle"></i>
                       </a>

@@ -26,6 +26,7 @@ function Navbar({ navItems }) {
       setError("Failed to log out");
     }
   }
+
   return (
     <>
       <IconContext.Provider value={{ color: "fff" }}>

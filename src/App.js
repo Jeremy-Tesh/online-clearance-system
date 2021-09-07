@@ -3,7 +3,7 @@ import "./App.css";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import PrivateRoute from "./routes/PrivateRoute";
 import IndexRoute from "./routes";
-
+import Signup from "./pages/Signup/Signup";
 import { AuthProvider } from "./contexts/AuthContext";
 import Login from "./routes/Login";
 
@@ -13,7 +13,8 @@ function App() {
       <AuthProvider>
         <Switch>
           <Route exact path="/login" component={Login} />
-          <PrivateRoute exact path="/IndexRoute" component={IndexRoute} />
+          <Route exact path="/signup" component={Signup} />
+          <Route path="/IndexRoute" component={IndexRoute} />
         </Switch>
       </AuthProvider>
     </Router>

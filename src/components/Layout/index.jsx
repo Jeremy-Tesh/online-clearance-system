@@ -5,8 +5,15 @@ import * as CgIcons from "react-icons/cg";
 import * as GrIcons from "react-icons/gr";
 import * as IoIcons from "react-icons/io";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { useAuth } from "../../contexts/AuthContext";
 
-const Layout = ({ children, role }) => {
+const Layout = ({ children }) => {
+  const {
+    userData: { role },
+  } = useAuth();
+
+  console.log(role);
+
   const data = {
     student: [
       {
@@ -27,7 +34,7 @@ const Layout = ({ children, role }) => {
       {
         id: 3,
         name: "Notification",
-        path: "./notification",
+        path: "./dash",
         cName: "nav-text",
         icon: <IoIcons.IoMdNotificationsOutline />,
       },
@@ -105,7 +112,7 @@ const Layout = ({ children, role }) => {
 
   return (
     <div>
-      <Navbar navItems={data.officer} />
+      <Navbar navItems={data[role]} />
       <div>{children}</div>
     </div>
   );

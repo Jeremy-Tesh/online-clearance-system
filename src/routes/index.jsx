@@ -8,36 +8,30 @@ import { useAuth } from "../contexts/AuthContext";
 
 const IndexRoute = () => {
   const {
-    currentUser: { email },
+    userData: { role },
   } = useAuth();
-  const role = "";
 
   const renderAppBasedOnRole = () => {
-    switch (email) {
-      case "none":
+    switch (role) {
+      case "staff":
         return (
           <div>
-            role="staff"
             <Staff />
-            <Layout role={role} />
           </div>
         );
-      case "jermitesh20@gmail.com": {
-        <Layout role="student" />;
+      case "student": {
         return (
           <div>
             <Student />
           </div>
         );
       }
-      case "officer@officer.com":
+      case "officer":
         return (
           <div>
             <Officer />
           </div>
         );
-      case "e@gmail.com":
-        return <Officer />;
       default:
         return null;
     }
