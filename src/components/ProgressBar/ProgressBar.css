@@ -6,6 +6,7 @@
 
 .svg-circle-bg {
   fill: none;
+  background: white;
 }
 
 .svg-circle {
@@ -15,6 +16,6 @@
 .svg-circle-text {
   font-size: 2rem;
   text-anchor: middle;
-  fill: #fff;
+
   font-weight: bold;
 }

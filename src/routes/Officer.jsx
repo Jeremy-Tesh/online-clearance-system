@@ -9,6 +9,7 @@ import {
 
 import Property from "../components/property/property";
 import QueueList from "../pages/OfficerPage/QueueList";
+import Dashboard from "../pages/OfficerPage/Dashboard";
 
 const Officer = () => {
   return (
@@ -17,6 +18,7 @@ const Officer = () => {
         <Switch>
           <Route exact path="/property" component={Property} />
           <Route exact path="/queuelist" component={QueueList} />
+          <Route path="/" component={Dashboard} />
         </Switch>
       </Layout>
     </Router>

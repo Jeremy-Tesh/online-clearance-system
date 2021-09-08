@@ -12,8 +12,6 @@ const Layout = ({ children }) => {
     userData: { role },
   } = useAuth();
 
-  console.log(role);
-
   const data = {
     student: [
       {

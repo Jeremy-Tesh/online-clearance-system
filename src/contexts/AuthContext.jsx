@@ -1,6 +1,5 @@
 import React, { useContext, useState, useEffect } from "react";
 import { auth, db } from "../fire";
-import { faHourglassStart } from "@fortawesome/free-solid-svg-icons";
 
 const AuthContext = React.createContext();
 
@@ -10,48 +9,38 @@ export function useAuth() {
 
 export function AuthProvider({ children }) {
   const [currentUser, setCurrentUser] = useState();
-  const [userData, setUserData] = useState(null);
+  const [userData, setUserData] = useState({});
   const [loading, setLoading] = useState(true);
 
-  useEffect(() => {
-    const user = {
-      name: "Ermi Teshome",
-      role: "officer",
-    };
-    setUserData(user);
-  }, []);
+  // useEffect(() => {
+  //   fetchCurrentUser();
+  // }, []);
 
   function signUp(email, password) {
     return auth.createUserWithEmailAndPassword(email, password);
   }
 
-  function login(email, password) {
+  async function login(email, password) {
     // get user data from firebase
-
-    auth.signInWithEmailAndPassword(email, password);
-    return fetchCurrentUser(email);
+    fetchCurrentUser(email);
+    return auth.signInWithEmailAndPassword(email, password);
   }
   function fetchCurrentUser(email) {
-    var docRef = db.collection("users").where("email", "==", email);
-    console.log(email);
-    console.log(docRef);
-    docRef
+    db.collection("users")
+      .where("email", "==", email)
       .get()
-      .then((doc) => {
-        if (doc.exists) {
-          console.log("Document data:", doc.data());
-        } else {
-          // doc.data() will be undefined in this case
-          console.log("No such document!");
-        }
-      })
-      .catch((error) => {
-        console.log("Error getting document:", error);
+      .then((snapshot) => {
+        snapshot.docs.forEach((doc) => {
+          var data = doc.data();
+          setUserData(data);
+        });
       });
+    console.log(userData.role);
   }
 
   function logout() {
-    return auth.signOut();
+    auth.signOut();
+    setUserData({});
   }
 
   function resetPassword(email) {
@@ -70,6 +59,7 @@ export function AuthProvider({ children }) {
     const unsubscribe = auth.onAuthStateChanged((user) => {
       setCurrentUser(user);
       setLoading(false);
+      console.log(user);
     });
 
     return unsubscribe;

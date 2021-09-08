@@ -51,15 +51,6 @@ function QueueList() {
     handleClick();
   }, []);
 
-  const a = { x: 1, y: 2 };
-
-  const b = a.x;
-  console.log(b);
-  console.log(b);
-  console.log(b);
-  console.log(b);
-  console.log(b);
-  console.log(b);
   return (
     <div className="queue_list">
       <FontAwesomeIcon icon={faHome} />

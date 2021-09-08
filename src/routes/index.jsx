@@ -5,14 +5,15 @@ import Student from "./Student";
 import Admin from "./Admin";
 import Layout from "../components/Layout/index";
 import { useAuth } from "../contexts/AuthContext";
+import Login from "./Login";
+import Signup from "../pages/Signup/Signup";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
 const IndexRoute = () => {
-  const {
-    userData: { role },
-  } = useAuth();
-
+  const { userData } = useAuth();
+  console.log(userData);
   const renderAppBasedOnRole = () => {
-    switch (role) {
+    switch (userData.role) {
       case "staff":
         return (
           <div>
@@ -32,8 +33,21 @@ const IndexRoute = () => {
             <Officer />
           </div>
         );
+      case "admin":
+        return (
+          <div>
+            <Admin />
+          </div>
+        );
       default:
-        return null;
+        return (
+          <Router>
+            <Switch>
+              <Route exact path="/login" component={Login} />
+              <Route exact path="/signup" component={Signup} />
+            </Switch>
+          </Router>
+        );
     }
   };
 

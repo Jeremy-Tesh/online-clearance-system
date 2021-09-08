@@ -2,27 +2,32 @@ import React, { useState } from "react";
 import { Redirect, Link } from "react-router-dom";
 import { auth, db } from "../../fire";
 import { useAuth } from "../../contexts/AuthContext";
-// import "./Signup.css";
+import "./Signup.css";
 
 const SignUp = () => {
-  const [currentUser, setCurrentUser] = useState(null);
-  const [fname, setFname] = useState("");
-  const [mname, setMname] = useState("");
-  const [lname, setLname] = useState("");
-  const [department, setDepartment] = useState("");
-  const [role, setRole] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const userData = {
+    firstname: "",
+    middlename: "",
+    lastname: "",
+    email: "",
+    department: "",
+    password: "",
+    role: "student",
+    status: 30,
+  };
+  const [data, setData] = useState(userData);
   const { signUp } = useAuth();
-
+  const handleInputChange = (e) => {
+    var { name, value } = e.target;
+    setData({ ...data, [name]: value });
+  };
   async function handleSubmit(e) {
     e.preventDefault();
-    db.collection("users").add({
-      fname: fname,
-    });
 
     try {
-      await signUp(email, password);
+      await signUp(data.email, data.password);
+      db.collection("users").add(data);
+      alert("SUCCESSFUL");
     } catch (error) {
       alert(error);
     }
@@ -40,17 +45,43 @@ const SignUp = () => {
               type="text"
               className="form-control"
               placeholder="First name"
-              value={fname}
-              onChange={(e) => setFname(e.target.value)}
+              name="firstname"
+              value={data.firstname}
+              onChange={handleInputChange}
             />
           </div>
 
+          <div className="form-group">
+            <label>Middle name</label>
+            <input
+              type="text"
+              className="form-control"
+              name="middlename"
+              placeholder="Middle name"
+              value={data.middlename}
+              onChange={handleInputChange}
+            />
+          </div>
           <div className="form-group">
             <label>Last name</label>
             <input
               type="text"
               className="form-control"
+              name="lastname"
               placeholder="Last name"
+              value={data.lastname}
+              onChange={handleInputChange}
+            />
+          </div>
+          <div className="form-group">
+            <label>Department</label>
+            <input
+              type="text"
+              className="form-control"
+              name="department"
+              placeholder="Department"
+              value={data.department}
+              onChange={handleInputChange}
             />
           </div>
 
@@ -61,8 +92,8 @@ const SignUp = () => {
               className="form-control"
               name="email"
               placeholder="Enter email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
+              value={data.email}
+              onChange={handleInputChange}
             />
           </div>
 
@@ -73,8 +104,8 @@ const SignUp = () => {
               className="form-control"
               name="password"
               placeholder="Enter password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
+              value={data.password}
+              onChange={handleInputChange}
             />
           </div>
 
@@ -86,7 +117,7 @@ const SignUp = () => {
             Sign Up
           </button>
           <p className="forgot-password text-right">
-            Already registered <Link to="/">sign in?</Link>
+            Already registered <Link to="/login">sign in?</Link>
           </p>
         </form>
       </div>

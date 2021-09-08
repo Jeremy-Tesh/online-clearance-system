@@ -23,7 +23,7 @@
   width: 250px;
   height: 100vh;
   display: flex;
-  justify-content: center;
+  justify-content: space-evenly;
   position: fixed;
   top: 0;
   left: -100%;
@@ -37,6 +37,7 @@
   align-items: center;
   background-color: #303c54;
   z-index: 1;
+  flex-direction: column;
 }
 
 .nav-text {
@@ -102,4 +103,8 @@ button {
   box-shadow: 1px 1px 0px 2px rgba (0, 0, 0, 0.3);
   background: rgb(141, 217, 252);
   cursor: pointer;
+}
+.logo-and-text {
+  display: flex;
+  color: white;
 }

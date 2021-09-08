@@ -6,18 +6,13 @@ import IndexRoute from "./routes";
 import Signup from "./pages/Signup/Signup";
 import { AuthProvider } from "./contexts/AuthContext";
 import Login from "./routes/Login";
+import { useAuth } from "./contexts/AuthContext";
 
 function App() {
   return (
-    <Router>
-      <AuthProvider>
-        <Switch>
-          <Route exact path="/login" component={Login} />
-          <Route exact path="/signup" component={Signup} />
-          <Route path="/IndexRoute" component={IndexRoute} />
-        </Switch>
-      </AuthProvider>
-    </Router>
+    <AuthProvider>
+      <IndexRoute />
+    </AuthProvider>
   );
 }
 

@@ -52,7 +52,7 @@ const ClearanceForm = () => {
   };
 
   return (
-    <div className="container">
+    <div className="clearance_container">
       <div className="sub-container">
         <Form onSubmit={handleSubmit}>
           <Row className="mb-3">

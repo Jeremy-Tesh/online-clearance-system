@@ -16,7 +16,6 @@ const Admin = () => {
       <Layout>
         <Switch>
           <Route exact path="/dashboard" component={Dashboard} />
-          <Route exact path="/" render={() => <Redirect to="/dashboard" />} />
           <Route exact path="/profile" component={Profile} />
         </Switch>
       </Layout>

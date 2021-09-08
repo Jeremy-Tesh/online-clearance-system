@@ -1,36 +1,28 @@
 import React, { useState, useEffect } from "react";
 import Progress from "../../components/ProgressBar/Progress";
-import Layout from "../../components/Layout";
+import "./Profile.css";
+
 import { useAuth } from "../../contexts/AuthContext";
-import { db, firebaseDb } from "../../fire";
 
 const Profile = () => {
-  const [profile, setProfile] = useState([]);
-  const fetchProfile = async () => {
-    const response = db.collection("students");
-    const data = await response.get();
-    data.docs.forEach((item) => {
-      setProfile([...profile, item.data()]);
-    });
-  };
-  useEffect(() => {
-    fetchProfile();
-  }, []);
+  const {
+    userData: { firstname, email, status, department },
+  } = useAuth();
 
   return (
-    <div>
-      <h1>Student name</h1>
-      {profile &&
-        profile.map((profile) => {
-          return (
-            <div>
-              <h4>{profile.name}</h4>
-              <h3>{profile.Id}</h3>
-              <Progress x={profile.progress} />
-              <h1>{profile.progress}</h1>
-            </div>
-          );
-        })}
+    <div className="profile_container">
+      <div className="profile_sub">
+        <div className="left_profile">
+          <i className="fas fa-user fa-5x"></i>
+          <h1>{firstname}</h1>
+          <h2>{email}</h2>
+        </div>
+        <div className="right_profile">
+          <Progress x={status} />
+          <h2>current clearance office level</h2>
+          <h3>{department}</h3>
+        </div>
+      </div>
     </div>
   );
 };

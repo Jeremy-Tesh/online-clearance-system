@@ -5,7 +5,7 @@ import "./Progress.css";
 
 const Progress = ({ x }) => {
   const [progress, setProgress] = useState(x);
-  const [color, setColor] = useState("");
+  const [color, setColor] = useState("#4ac9bc");
   const colorArray = [
     "#7ea9e1",
     "#ed004f",
