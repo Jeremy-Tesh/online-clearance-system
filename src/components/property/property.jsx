@@ -2,20 +2,29 @@ import React, { useState, useEffect } from "react";
 import PropertyForm from "./propertyForm";
 import firebaseDb from "../../fire";
 import "./Style.css";
+import { useAuth } from "../../contexts/AuthContext";
 
 const Property = () => {
   var [propertyData, setpropertyData] = useState({});
   var [currentId, setCurrentId] = useState("");
+  const {
+    userData: { office },
+  } = useAuth();
 
   useEffect(() => {
-    firebaseDb.child("property-info").on("value", (snapshot) => {
-      if (snapshot.val() != null)
-        setpropertyData({
-          ...snapshot.val(),
-        });
-      else setpropertyData({});
-    });
+    firebaseDb
+      .child("property-info")
+      .orderByChild("office")
+      .equalTo(office)
+      .on("value", (snapshot) => {
+        if (snapshot.val() != null)
+          setpropertyData({
+            ...snapshot.val(),
+          });
+        else setpropertyData({});
+      });
   }, []);
+  console.log(propertyData);
 
   const addOrEdit = (obj) => {
     if (currentId == "") {
@@ -41,6 +50,7 @@ const Property = () => {
 
   return (
     <div className="manage-property">
+      <h1>{office}</h1>
       <div className="jumbotron jumbotron-fluid">
         <div className="container">
           <h1 className="display-4 text-center">Manage property</h1>
@@ -66,7 +76,6 @@ const Property = () => {
               </tr>
             </thead>
             <tbody>
-              {console.log(Object.keys)}
               {Object.keys(propertyData).map((id) => {
                 return (
                   <tr>

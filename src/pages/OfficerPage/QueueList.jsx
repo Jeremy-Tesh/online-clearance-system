@@ -1,31 +1,26 @@
 import React, { useEffect, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHome } from "@fortawesome/free-solid-svg-icons";
-
-import { db, firebaseDb } from "../../fire";
+import { useAuth } from "../../contexts/AuthContext";
+import { db } from "../../fire";
 
 function QueueList() {
-  const initialFieldValues = {
-    id: "",
-    fullName: "",
-    mobile: "",
-    email: "",
-    department: "",
-    year: "",
-  };
-  var [values, setValues] = useState(initialFieldValues);
-  var [state, setState] = useState("");
-
-  const [table, setTable] = useState([]);
+  const {
+    userData: { office, department, to },
+  } = useAuth();
+  var [values, setValues] = useState([]);
 
   const fetchTable = async () => {
-    db.collection("students")
+    await db
+      .collection("students")
+      .where("to", "==", office)
       .get()
-      .then((querySnapshot) => {
-        querySnapshot.forEach((doc) => {
-          var data = doc.data();
-          setTable((arr) => [...arr, data]);
+      .then((snapshot) => {
+        let v = [];
+        snapshot.docs.forEach((doc) => {
+          v.push(doc.data());
         });
+        setValues(v);
       });
   };
 
@@ -33,23 +28,14 @@ function QueueList() {
     fetchTable();
   }, []);
 
-  const handleClick = (id) => {
-    // let statusChangedData = table.filter((data) => data.id === id)[0];
-    // console.log(statusChangedData);
-    // statusChangedData.status = "checked";
-    // const updated = table.map((data) => {
-    //   if (data.id === id) {
-    //     return statusChangedData;
-    //   }
-    //   return data;
-    // });
-    // setTable(updated);
-    setState("clicked");
-    console.log("hook");
+  console.log(department);
+  const handleClick = (e) => {
+    e.preventDefault();
+    console.log("clicked");
   };
-  useEffect(() => {
-    handleClick();
-  }, []);
+  console.log(to);
+  console.log(office);
+  console.log(values);
 
   return (
     <div className="queue_list">
@@ -79,24 +65,24 @@ function QueueList() {
                 <th>Status</th>
               </tr>
             </thead>
+
             <tbody>
-              {/* {console.log(table.keys)} */}
-              {Object.keys(table).map((id) => {
+              {values.map((value) => {
                 return (
                   <tr>
-                    <td>{table[id].id}</td>
-                    <td>{table[id].fname + table[id].mname}</td>
+                    <td>{value.id}</td>
+                    <td>{value.fname + value.mname}</td>
 
-                    <td>{table[id].email}</td>
-                    <td>{table[id].mobile}</td>
-                    <td>{table[id].department}</td>
-                    <td>{table[id].year}</td>
+                    <td>{value.email}</td>
+                    <td>{value.mobile}</td>
+                    <td>{value.department}</td>
+                    <td>{value.year}</td>
 
                     <td>
-                      {table[id].status}
+                      {value.status}
                       <a
                         className="btn text-primary"
-                        onClick={() => handleClick(table[id].id)}
+                        onClick={() => handleClick(value.to)}
                       >
                         <i className="fas fa-check-circle"></i>
                       </a>

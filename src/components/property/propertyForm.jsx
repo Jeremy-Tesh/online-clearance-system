@@ -1,6 +1,10 @@
 import React, { useState, useEffect } from "react";
+import { useAuth } from "../../contexts/AuthContext";
 
 const PropertyForm = (props) => {
+  const {
+    userData: { office },
+  } = useAuth();
   const initialFieldValues = {
     id: "",
     fullName: "",
@@ -10,7 +14,7 @@ const PropertyForm = (props) => {
     year: "",
     property: "",
     amount: "",
-    office: "department",
+    office: office,
   };
   var [values, setValues] = useState(initialFieldValues);
 
