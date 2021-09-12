@@ -27,7 +27,7 @@ function Navbar({ navItems }) {
     try {
       await logout();
 
-      history.push("/login");
+      // history.push("/login");
     } catch {
       setError("Failed to log out");
     }

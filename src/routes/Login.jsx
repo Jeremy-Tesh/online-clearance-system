@@ -13,6 +13,8 @@ export default function Login() {
   const [loading, setLoading] = useState(false);
   const history = useHistory();
 
+  console.log("login pageeeeeee");
+
   async function handleSubmit(e) {
     e.preventDefault();
 

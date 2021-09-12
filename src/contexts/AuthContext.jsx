@@ -25,8 +25,9 @@ export function AuthProvider({ children }) {
     fetchCurrentUser(email);
     return auth.signInWithEmailAndPassword(email, password);
   }
-  function fetchCurrentUser(email) {
-    db.collection("users")
+  async function fetchCurrentUser(email) {
+    await db
+      .collection("users")
       .where("email", "==", email)
       .get()
       .then((snapshot) => {
@@ -35,10 +36,13 @@ export function AuthProvider({ children }) {
           setUserData(data);
         });
       });
+    setLoading(false);
+
     console.log(userData.role);
   }
 
   function logout() {
+    console.log("logout in auth");
     auth.signOut();
     setUserData({});
   }
@@ -57,8 +61,14 @@ export function AuthProvider({ children }) {
 
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged((user) => {
-      setCurrentUser(user);
-      setLoading(false);
+      console.log("auth state change");
+      if (user) {
+        fetchCurrentUser(user.email);
+      } else {
+        setCurrentUser(user);
+        setLoading(false);
+      }
+
       console.log(user);
     });
 
@@ -75,6 +85,22 @@ export function AuthProvider({ children }) {
     updatePassword,
     signUp,
   };
+
+  if (loading) {
+    return (
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          width: "100vw",
+          height: "100vh",
+        }}
+      >
+        <h1>Loading...</h1>
+      </div>
+    );
+  }
 
   return (
     <AuthContext.Provider value={value}>

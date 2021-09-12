@@ -7,13 +7,19 @@ import Layout from "../components/Layout/index";
 import { useAuth } from "../contexts/AuthContext";
 import Login from "./Login";
 import Signup from "../pages/Signup/Signup";
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Route,
+  Switch,
+  Redirect,
+} from "react-router-dom";
 
 const IndexRoute = () => {
   const { userData } = useAuth();
-  console.log(userData);
+  console.log("uer data in indeex route");
   const renderAppBasedOnRole = () => {
     switch (userData.role) {
+      // console.log("user data in switch ", userData)
       case "staff":
         return (
           <div>
@@ -39,15 +45,18 @@ const IndexRoute = () => {
             <Admin />
           </div>
         );
-      default:
+      default: {
+        console.log("rendering auth routes");
         return (
           <Router>
             <Switch>
               <Route exact path="/login" component={Login} />
               <Route exact path="/signup" component={Signup} />
+              <Redirect to="/login" />
             </Switch>
           </Router>
         );
+      }
     }
   };
 

@@ -33,7 +33,7 @@ const ClearanceForm = () => {
         college: college,
         reason: reason,
         status: status,
-        to: "department",
+        office: "department",
       })
       .then(() => {
         alert("Form Submitted Successfully!");
