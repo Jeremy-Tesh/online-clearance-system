@@ -3,10 +3,12 @@ import { useAuth } from "../../contexts/AuthContext";
 import { db } from "../../fire";
 
 const PropertyForm = (props) => {
-  var [values, setValues] = useState([]);
+  // var [values, setValues] = useState([]);
+
   const {
     userData: { office },
   } = useAuth();
+
   const initialFieldValues = {
     id: "",
     fullName: "",
@@ -16,9 +18,10 @@ const PropertyForm = (props) => {
     year: "",
     property: "",
     amount: "",
-    office: office,
+    office: "",
   };
-  var [values, setValues] = useState(initialFieldValues);
+  const [values, setValues] = useState(initialFieldValues);
+  values.office = office;
 
   useEffect(() => {
     if (props.currentId == "") setValues({ ...initialFieldValues });
@@ -104,7 +107,7 @@ const PropertyForm = (props) => {
             />
           </div>
 
-          {/* <div className="form-group input-group col-md-6">
+          <div className="form-group input-group col-md-6">
             <div className="input-group-prepend">
               <div className="input-group-text">
                 <i className="fas fa-envelope"></i>
@@ -148,8 +151,9 @@ const PropertyForm = (props) => {
                 College of Applied Science
               </option>
             </select>
-          </div> */}
+          </div>
         </div>
+        <span></span>
 
         <div className="form-row">
           <div className="form-group input-group col-md-6">
@@ -162,6 +166,7 @@ const PropertyForm = (props) => {
             <input
               className="form-control"
               placeholder="property"
+              name="property"
               value={values.property}
               onChange={handleInputChange}
             />

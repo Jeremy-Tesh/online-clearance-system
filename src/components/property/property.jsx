@@ -9,7 +9,6 @@ const Property = () => {
   const [allPropertyData, setAllPropertyData] = useState({});
   const [listNo, setlistNo] = useState(0);
 
-  const [search, setSearch] = useState();
   var [currentId, setCurrentId] = useState("");
   const {
     userData: { office },
@@ -44,6 +43,7 @@ const Property = () => {
   }, []);
 
   const addOrEdit = (obj) => {
+    console.log(obj);
     if (currentId == "") {
       firebaseDb.child("property-info").push(obj, (err) => {
         if (err) console.log(err);
@@ -67,13 +67,11 @@ const Property = () => {
 
   const handleSearch = (e) => {
     e.preventDefault();
-    console.log(e.target.value);
-    setSearch(e.target.value);
-    let obj = Object.values(propertyData).filter((o) =>
-      o.email.includes(search)
+
+    const obj = Object.values(propertyData).filter((o) =>
+      o.email.includes(e.target.value)
     );
-    if (obj) setpropertyData(obj);
-    else console.log("not found");
+    setAllPropertyData(obj);
   };
 
   return (
@@ -101,7 +99,6 @@ const Property = () => {
               type="search"
               placeholder="Search using Id"
               aria-label="Search"
-              value={search}
               onChange={handleSearch}
             />
             <button
@@ -133,18 +130,18 @@ const Property = () => {
               </tr>
             </thead>
             <tbody>
-              {Object.keys(propertyData).map((id) => {
+              {Object.keys(allPropertyData).map((id) => {
                 return (
                   <tr>
-                    <td>{propertyData[id].id}</td>
-                    <td>{propertyData[id].fullName}</td>
+                    <td>{allPropertyData[id].id}</td>
+                    <td>{allPropertyData[id].fullName}</td>
 
-                    <td>{propertyData[id].email}</td>
-                    <td>{propertyData[id].mobile}</td>
-                    <td>{propertyData[id].department}</td>
-                    <td>{propertyData[id].year}</td>
-                    <td>{propertyData[id].property}</td>
-                    <td>{propertyData[id].amount}</td>
+                    <td>{allPropertyData[id].email}</td>
+                    <td>{allPropertyData[id].mobile}</td>
+                    <td>{allPropertyData[id].department}</td>
+                    <td>{allPropertyData[id].year}</td>
+                    <td>{allPropertyData[id].property}</td>
+                    <td>{allPropertyData[id].amount}</td>
                     <td>
                       <a
                         className="btn text-primary"
