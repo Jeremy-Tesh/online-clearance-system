@@ -1,4 +1,5 @@
 import React, { useContext, useState, useEffect } from "react";
+import Spinner from "react-bootstrap/Spinner";
 import { auth, db } from "../fire";
 
 const AuthContext = React.createContext();
@@ -17,7 +18,7 @@ export function AuthProvider({ children }) {
   // }, []);
 
   function signUp(email, password) {
-    return auth.createUserWithEmailAndPassword(email, password);
+    auth.createUserWithEmailAndPassword(email, password);
   }
 
   async function login(email, password) {
@@ -97,7 +98,7 @@ export function AuthProvider({ children }) {
           height: "100vh",
         }}
       >
-        <h1>Loading...</h1>
+        <Spinner animation="border" variant="primary" />
       </div>
     );
   }

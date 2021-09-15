@@ -1,121 +1,65 @@
 import React, { useState } from "react";
 import { useAuth } from "../../contexts/AuthContext";
 import { db } from "../../fire";
-import Link from "react-router-dom";
+import { Form, Col, Row } from "react-bootstrap";
+import Card from "react-bootstrap/Card";
+
 const Dashboard = () => {
-  const userData = {
-    firstname: "",
-    middlename: "",
-    lastname: "",
-    email: "",
-    office: "",
-    password: "",
-    role: "officer",
-    status: 30,
-  };
-  const [data, setData] = useState(userData);
-  const { signUp } = useAuth();
-  const handleInputChange = (e) => {
-    var { name, value } = e.target;
-    setData({ ...data, [name]: value });
-  };
-  async function handleSubmit(e) {
-    e.preventDefault();
-
-    try {
-      await signUp(data.email, data.password);
-      db.collection("users").add(data);
-      alert("SUCCESSFUL");
-    } catch (error) {
-      alert(error);
-    }
-  }
-
+  const {
+    userData: { fname, name, office, email },
+  } = useAuth();
   return (
-    <div className="signup_con">
-      <div className="signup">
-        <form onSubmit={handleSubmit}>
-          <h3>Register officer</h3>
-
-          <div className="form-group">
-            <label>First name</label>
-            <input
-              type="text"
-              className="form-control"
-              placeholder="First name"
-              name="firstname"
-              value={data.firstname}
-              onChange={handleInputChange}
-            />
-          </div>
-
-          <div className="form-group">
-            <label>Middle name</label>
-            <input
-              type="text"
-              className="form-control"
-              name="middlename"
-              placeholder="Middle name"
-              value={data.middlename}
-              onChange={handleInputChange}
-            />
-          </div>
-          <div className="form-group">
-            <label>Last name</label>
-            <input
-              type="text"
-              className="form-control"
-              name="lastname"
-              placeholder="Last name"
-              value={data.lastname}
-              onChange={handleInputChange}
-            />
-          </div>
-          <div className="form-group">
-            <label>Office</label>
-            <input
-              type="text"
-              className="form-control"
-              name="office"
-              placeholder="Office"
-              value={data.office}
-              onChange={handleInputChange}
-            />
-          </div>
-
-          <div className="form-group">
-            <label>Email address</label>
-            <input
-              type="email"
-              className="form-control"
-              name="email"
-              placeholder="Enter email"
-              value={data.email}
-              onChange={handleInputChange}
-            />
-          </div>
-
-          <div className="form-group">
-            <label>Password</label>
-            <input
-              type="password"
-              className="form-control"
-              name="password"
-              placeholder="Enter password"
-              value={data.password}
-              onChange={handleInputChange}
-            />
-          </div>
-
-          <button
-            type="submit"
-            className="btn btn-primary btn-block"
-            onSubmit={handleSubmit}
-          >
-            Sign Up
-          </button>
-        </form>
+    <div>
+      <div className="officer-header">
+        <i className="fas fa-user fa-5x"></i>
+        {/* <img src={avatar} alt="avatar" /> */}
       </div>
+      <div>
+        <h1>Your details</h1>
+
+        <Card
+          bg="light"
+          style={{
+            width: "100%",
+            display: "flex",
+            padding: "30px",
+          }}
+        >
+          <Card.Header>
+            <h1>Adminstration Office</h1>
+          </Card.Header>
+          <Card.Body>
+            <Card.Title>Your details</Card.Title>
+            <Form style={{ width: "50%" }}>
+              <Row className="mb-3">
+                <Form.Group as={Col}>
+                  <Form.Label>First Name</Form.Label>
+                  <Form.Control
+                    type="text"
+                    placeholder={fname}
+                    value={fname}
+                    readonly="readonly"
+                  />
+                </Form.Group>
+                <Form.Group as={Col}>
+                  <Form.Label>Email</Form.Label>
+                  <Form.Control
+                    type="text"
+                    placeholder={email}
+                    value={email}
+                    readonly="readonly"
+                  />
+                </Form.Group>
+              </Row>
+            </Form>
+          </Card.Body>
+        </Card>
+        <br />
+      </div>
+
+      <h1>{office}</h1>
+
+      <span>{email}</span>
     </div>
   );
 };

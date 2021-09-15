@@ -75,12 +75,14 @@ const Layout = ({ children }) => {
         name: "Check queue list",
         path: "/queuelist",
         cName: "nav-text",
+        icon: <i className="fas fa-clipboard-list"></i>,
       },
       {
         id: 3,
         name: "Manage Property",
         path: "/property",
         cName: "nav-text",
+        icon: <i className="fas fa-address-card"></i>,
       },
     ],
 
@@ -102,8 +104,9 @@ const Layout = ({ children }) => {
       {
         id: 3,
         name: "Register officer",
-        path: "/registeration",
+        path: "/registration",
         cName: "nav-text",
+        icon: <i className="fas fa-edit"></i>,
       },
     ],
   };

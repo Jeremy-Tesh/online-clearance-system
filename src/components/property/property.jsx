@@ -1,30 +1,47 @@
 import React, { useState, useEffect } from "react";
 import PropertyForm from "./propertyForm";
-import firebaseDb from "../../fire";
+import firebaseDb, { db } from "../../fire";
 import "./Style.css";
 import { useAuth } from "../../contexts/AuthContext";
 
 const Property = () => {
-  var [propertyData, setpropertyData] = useState({});
+  const [propertyData, setpropertyData] = useState({});
+  const [allPropertyData, setAllPropertyData] = useState({});
+  const [listNo, setlistNo] = useState(0);
+
+  const [search, setSearch] = useState();
   var [currentId, setCurrentId] = useState("");
   const {
     userData: { office },
   } = useAuth();
 
-  useEffect(() => {
+  async function fetchData() {
     firebaseDb
       .child("property-info")
       .orderByChild("office")
       .equalTo(office)
       .on("value", (snapshot) => {
-        if (snapshot.val() != null)
+        if (snapshot.val() != null) {
           setpropertyData({
             ...snapshot.val(),
           });
-        else setpropertyData({});
+          setAllPropertyData({
+            ...snapshot.val(),
+          });
+
+          setlistNo(snapshot.numChildren());
+        } else {
+          setAllPropertyData({});
+          setpropertyData({});
+        }
       });
+
+    console.log(listNo);
+  }
+
+  useEffect(() => {
+    fetchData();
   }, []);
-  console.log(propertyData);
 
   const addOrEdit = (obj) => {
     if (currentId == "") {
@@ -48,6 +65,17 @@ const Property = () => {
     }
   };
 
+  const handleSearch = (e) => {
+    e.preventDefault();
+    console.log(e.target.value);
+    setSearch(e.target.value);
+    let obj = Object.values(propertyData).filter((o) =>
+      o.email.includes(search)
+    );
+    if (obj) setpropertyData(obj);
+    else console.log("not found");
+  };
+
   return (
     <div className="manage-property">
       <h1>{office}</h1>
@@ -57,9 +85,38 @@ const Property = () => {
         </div>
       </div>
       <div className="row">
-        <div className="col-md-5">
-          <PropertyForm {...{ addOrEdit, currentId, propertyData }} />
+        <div
+          style={{
+            background: "",
+            width: "100%",
+            display: "flex",
+            justifyContent: "flex-end",
+            paddingBottom: "4px",
+          }}
+        >
+          {" "}
+          <form className="form-inline" onSubmit={handleSearch}>
+            <input
+              className="form-control mr-sm-2"
+              type="search"
+              placeholder="Search using Id"
+              aria-label="Search"
+              value={search}
+              onChange={handleSearch}
+            />
+            <button
+              className="btn btn-outline-success my-2 my-sm-0"
+              type="submit"
+            >
+              Search
+            </button>
+          </form>
         </div>
+
+        <div className="col-md-5">
+          <PropertyForm {...{ addOrEdit, currentId, propertyData, listNo }} />
+        </div>
+
         <div className="col-md-7">
           <table className="table table-borderless table-stripped">
             <thead className="thead-light">

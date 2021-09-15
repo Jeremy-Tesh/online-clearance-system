@@ -42,7 +42,7 @@ function Navbar({ navItems }) {
             <FaIcons.FaBars onClick={showSidebar} />
           </Link>
           {error && <Alert variant="danger">{error}</Alert>}
-          <p>{role + " " + "page"}</p>
+          <p> {role.toUpperCase()} PAGE</p>
           <button type="button" onClick={handleLogout}>
             Logout
           </button>

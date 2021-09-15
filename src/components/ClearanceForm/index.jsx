@@ -3,13 +3,18 @@ import { Form, Button, Row, Col } from "react-bootstrap";
 
 import "./style.css";
 import { db } from "../../fire";
+import { useAuth } from "../../contexts/AuthContext";
 
 const ClearanceForm = () => {
-  const [fname, setFname] = useState("");
-  const [lname, setLname] = useState("");
-  const [mname, setMname] = useState("");
-  const [id, setId] = useState("");
-  const [email, setEmail] = useState("");
+  const {
+    userData: { fname, mname, lname, email, id },
+  } = useAuth();
+
+  // const [fname, setFname] = useState("");
+  // const [lname, setLname] = useState("");
+  // const [mname, setMname] = useState("");
+  // const [id, setId] = useState("");
+  // const [email, setEmail] = useState("");
   const [department, setDepartment] = useState("");
   const [section, setSection] = useState("");
   const [year, setYear] = useState("");
@@ -41,11 +46,7 @@ const ClearanceForm = () => {
       .catch((error) => {
         alert(error.message);
       });
-    setFname("");
-    setMname("");
-    setLname("");
-    setId("");
-    setEmail("");
+
     setDepartment("");
     setSection("");
     setYear("");
@@ -61,9 +62,8 @@ const ClearanceForm = () => {
               <Form.Label>First Name</Form.Label>
               <Form.Control
                 type="text"
-                placeholder="First Name"
-                value={fname}
-                onChange={(e) => setFname(e.target.value)}
+                placeholder={fname}
+                readonly="readonly"
               />
             </Form.Group>
 
@@ -71,18 +71,16 @@ const ClearanceForm = () => {
               <Form.Label>Middle Name</Form.Label>
               <Form.Control
                 type="text"
-                placeholder="Middle Name"
-                value={mname}
-                onChange={(e) => setMname(e.target.value)}
+                placeholder={mname}
+                readonly="readonly"
               />
             </Form.Group>
             <Form.Group as={Col}>
               <Form.Label>Last Name</Form.Label>
               <Form.Control
                 type="text"
-                placeholder="Last Name"
-                value={lname}
-                onChange={(e) => setLname(e.target.value)}
+                placeholder={lname}
+                readonly="readonly"
               />
             </Form.Group>
           </Row>
@@ -92,15 +90,9 @@ const ClearanceForm = () => {
               <Form.Label>Email</Form.Label>
               <Form.Control
                 type="email"
-                placeholder="Email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
+                placeholder={email}
+                readonly="readonly"
               />
-            </Form.Group>
-
-            <Form.Group as={Col}>
-              <Form.Label>Password</Form.Label>
-              <Form.Control type="password" placeholder="Password" />
             </Form.Group>
           </Row>
 
@@ -145,6 +137,10 @@ const ClearanceForm = () => {
                 onChange={(e) => setSection(e.target.value)}
               />
             </Form.Group>
+            <Form.Group as={Col}>
+              <Form.Label>ID</Form.Label>
+              <Form.Control type="id" placeholder={id} readonly="readonly" />
+            </Form.Group>
 
             <Form.Group as={Col}>
               <Form.Label>Class Year</Form.Label>
@@ -155,14 +151,14 @@ const ClearanceForm = () => {
               />
             </Form.Group>
 
-            <Form.Group as={Col}>
+            {/* <Form.Group as={Col}>
               <Form.Label>ID</Form.Label>
               <Form.Control
                 placeholder="ID"
                 value={id}
                 onChange={(e) => setId(e.target.value)}
               />
-            </Form.Group>
+            </Form.Group> */}
           </Row>
 
           <Row className="mb-3">

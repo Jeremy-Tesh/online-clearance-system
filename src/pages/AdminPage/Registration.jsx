@@ -1,20 +1,17 @@
 import React, { useState } from "react";
-import { Redirect, Link } from "react-router-dom";
-import { auth, db } from "../../fire";
+import { db } from "../../fire";
 import { useAuth } from "../../contexts/AuthContext";
-import "./Signup.css";
 
-const SignUp = () => {
+const Registration = () => {
   const userData = {
-    id: "",
-    fname: "",
-    mname: "",
-    lname: "",
+    firstname: "",
+    middlename: "",
+    lastname: "",
     email: "",
-    department: "",
+    office: "",
     password: "",
-    role: "student",
-    status: 0,
+    role: "officer",
+    status: 30,
   };
   const [data, setData] = useState(userData);
   const { signUp } = useAuth();
@@ -33,12 +30,12 @@ const SignUp = () => {
       alert(error);
     }
   }
-
+  console.log("im here");
   return (
     <div className="signup_con">
       <div className="signup">
         <form onSubmit={handleSubmit}>
-          <h3>Sign Up</h3>
+          <h3>Register officer</h3>
 
           <div className="form-group">
             <label>First name</label>
@@ -47,7 +44,7 @@ const SignUp = () => {
               className="form-control"
               placeholder="First name"
               name="firstname"
-              value={data.fname}
+              value={data.firstname}
               onChange={handleInputChange}
             />
           </div>
@@ -59,7 +56,7 @@ const SignUp = () => {
               className="form-control"
               name="middlename"
               placeholder="Middle name"
-              value={data.mname}
+              value={data.middlename}
               onChange={handleInputChange}
             />
           </div>
@@ -70,29 +67,18 @@ const SignUp = () => {
               className="form-control"
               name="lastname"
               placeholder="Last name"
-              value={data.lname}
+              value={data.lastname}
               onChange={handleInputChange}
             />
           </div>
           <div className="form-group">
-            <label>Department</label>
+            <label>Office</label>
             <input
               type="text"
               className="form-control"
-              name="department"
-              placeholder="Department"
-              value={data.department}
-              onChange={handleInputChange}
-            />
-          </div>
-          <div className="form-group">
-            <label>ID</label>
-            <input
-              type="text"
-              className="form-control"
-              name="id"
-              placeholder="ID"
-              value={data.id}
+              name="office"
+              placeholder="Office"
+              value={data.office}
               onChange={handleInputChange}
             />
           </div>
@@ -126,14 +112,12 @@ const SignUp = () => {
             className="btn btn-primary btn-block"
             onSubmit={handleSubmit}
           >
-            Sign Up
+            Register
           </button>
-          <p className="forgot-password text-right">
-            Already registered <Link to="/login">sign in?</Link>
-          </p>
         </form>
       </div>
     </div>
   );
 };
-export default SignUp;
+
+export default Registration;

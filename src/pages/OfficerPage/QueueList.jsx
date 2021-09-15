@@ -5,11 +5,13 @@ import { useAuth } from "../../contexts/AuthContext";
 import { db } from "../../fire";
 
 function QueueList() {
+  const [search, setSearch] = useState([]);
   const {
     userData: { office },
   } = useAuth();
   var [values, setValues] = useState([]);
-
+  const [key, setKey] = useState();
+  console.log(office);
   const fetchTable = async () => {
     await db
       .collection("students")
@@ -17,7 +19,8 @@ function QueueList() {
       .get()
       .then((snapshot) => {
         let v = [];
-        snapshot.docs.forEach((doc) => {
+        snapshot.forEach((doc) => {
+          console.log(doc.data());
           v.push(doc.data());
         });
         setValues(v);
@@ -70,6 +73,14 @@ function QueueList() {
     console.log(values.office);
   };
 
+  const handleSearch = (e) => {
+    e.preventDefault();
+    console.log(search);
+    let obj = values.find((o) => o.email === search);
+    if (obj) console.log("found");
+    else console.log("not found");
+  };
+
   return (
     <div className="queue_list">
       <FontAwesomeIcon icon={faHome} />
@@ -82,9 +93,35 @@ function QueueList() {
           <h1 className="display-4 text-center">Queue List</h1>
         </div>
       </div>
-      <div className="row">
+      <div className="row" style={{ width: "100%", padding: "50px 50px" }}>
         <div className="col-md-5"></div>
-        <div className="col-md-7" style={{ width: "100%", padding: "50px" }}>
+        <div
+          style={{
+            background: "",
+            width: "100%",
+            display: "flex",
+            justifyContent: "flex-end",
+          }}
+        >
+          {" "}
+          <form className="form-inline" onSubmit={handleSearch}>
+            <input
+              className="form-control mr-sm-2"
+              type="search"
+              placeholder="Search"
+              aria-label="Search"
+              value={search}
+              onChange={(e) => setSearch(e.target.value)}
+            />
+            <button
+              className="btn btn-outline-success my-2 my-sm-0"
+              type="submit"
+            >
+              Search
+            </button>
+          </form>
+        </div>
+        <div className="col-md-7" style={{ width: "100%" }}>
           <table className="table table-sm table-hover">
             <thead className="thead-light">
               <tr>
@@ -113,15 +150,25 @@ function QueueList() {
 
                     <td>
                       {value.status}
-                      <a
-                        className="btn text-primary"
+                      <span></span>
+                      <button
+                        type="button"
+                        className="btn btn-success"
                         onClick={() => handleClick(value)}
                       >
+                        Approve
+                      </button>
+                      <span></span>
+                      {/* <a className="btn text-primary">
                         <i className="fas fa-check-circle"></i>
-                      </a>
-                      <a className="btn text-primary" onClick={handleClick}>
-                        <i className="far fa-times-circle" color="red"></i>
-                      </a>
+                      </a> */}
+                      <button
+                        type="button"
+                        className="btn btn-danger btn-group-sm"
+                        // onClick={() => handleDecline(value)}
+                      >
+                        Decline
+                      </button>
                     </td>
                   </tr>
                 );
