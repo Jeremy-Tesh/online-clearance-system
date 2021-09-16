@@ -16,17 +16,17 @@ const Layout = ({ children }) => {
     student: [
       {
         id: 1,
-        title: "Student",
-        name: "Dashboard",
-        path: "/dashboard",
-        icon: <AiIcons.AiFillDashboard />,
+        name: "Profile",
+        path: "/profile",
+        icon: <CgIcons.CgProfile />,
         cName: "nav-text",
       },
       {
         id: 2,
-        name: "Profile",
-        path: "/profile",
-        icon: <CgIcons.CgProfile />,
+        title: "Student",
+        name: "Fill in form",
+        path: "/dashboard",
+        icon: <AiIcons.AiFillDashboard />,
         cName: "nav-text",
       },
       {

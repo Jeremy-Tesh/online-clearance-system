@@ -7,14 +7,12 @@ import { Form, Button, Row, Col } from "react-bootstrap";
 
 function Dashboard() {
   const {
-    userData: { fname, name, office, email },
+    userData: { firstname, middlename, office, email },
   } = useAuth();
 
   return (
     <div>
-      <div className="officer-header">
-        <img src={avatar} alt="avatar" />
-      </div>
+      <div className="officer-header"></div>
       <div>
         {/* <input
           type="text"
@@ -35,15 +33,20 @@ function Dashboard() {
             <h1>{office + " " + "office"}</h1>
           </Card.Header>
           <Card.Body>
+            <img
+              src={avatar}
+              alt="avatar"
+              style={{ width: "100px", padding: "10px" }}
+            />
             <Card.Title>Your details</Card.Title>
             <Form style={{ width: "50%" }}>
               <Row className="mb-3">
                 <Form.Group as={Col}>
-                  <Form.Label>First Name</Form.Label>
+                  <Form.Label>Full Name</Form.Label>
                   <Form.Control
                     type="text"
-                    placeholder={name}
-                    value={name}
+                    placeholder={firstname}
+                    value={firstname + " " + middlename}
                     readonly="readonly"
                   />
                 </Form.Group>
@@ -53,6 +56,16 @@ function Dashboard() {
                     type="text"
                     placeholder={email}
                     value={email}
+                    readonly="readonly"
+                  />
+                </Form.Group>
+              </Row>
+              <Row className="mb-3">
+                <Form.Group className="col-md-6">
+                  <Form.Label>Current office</Form.Label>
+                  <Form.Control
+                    type="text"
+                    value={office}
                     readonly="readonly"
                   />
                 </Form.Group>

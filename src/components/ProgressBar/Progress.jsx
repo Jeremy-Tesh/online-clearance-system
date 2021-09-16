@@ -4,6 +4,7 @@ import ProgressBar from "./ProgressBar";
 import "./Progress.css";
 
 const Progress = ({ x }) => {
+  console.log(x);
   const [progress, setProgress] = useState(x);
   const [color, setColor] = useState("#4ac9bc");
   const colorArray = [

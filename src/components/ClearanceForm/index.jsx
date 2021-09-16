@@ -20,7 +20,7 @@ const ClearanceForm = () => {
   const [year, setYear] = useState("");
   const [college, setCollege] = useState("Ele");
   const [reason, setReason] = useState("");
-  const [status, setStatus] = useState("Not cleared");
+  const [status, setStatus] = useState(0);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -50,7 +50,7 @@ const ClearanceForm = () => {
     setDepartment("");
     setSection("");
     setYear("");
-    setStatus("Not cleared");
+    setStatus(0);
   };
 
   return (

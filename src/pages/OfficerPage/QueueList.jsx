@@ -6,8 +6,9 @@ import { db } from "../../fire";
 
 function QueueList() {
   const [search, setSearch] = useState([]);
+  const [listNo, setlistNo] = useState();
   const {
-    userData: { office },
+    userData: { office, status },
   } = useAuth();
   var [values, setValues] = useState([]);
   const [key, setKey] = useState();
@@ -24,6 +25,7 @@ function QueueList() {
           v.push(doc.data());
         });
         setValues(v);
+        setlistNo(snapshot.size);
       });
   };
 
@@ -44,11 +46,7 @@ function QueueList() {
         .then((q) => {
           // console.log("docs", q.docs);
           q.docs.forEach((item) => {
-            console.log("item data", item.data().office);
-            console.log("student email", student.email);
             if (item.data().email === student.email) {
-              console.log("found ", item.id);
-              console.log("last data", item.data().office);
               docId = item.id;
             }
           });
@@ -57,7 +55,7 @@ function QueueList() {
       await db
         .collection("students")
         .doc(docId)
-        .update({ office: obj[student.office] })
+        .update({ office: obj[student.office], status: student.status + 33 })
         .then(() => {
           console.log("Document successfully written!");
           fetchTable();
@@ -82,8 +80,8 @@ function QueueList() {
   };
 
   return (
-    <div className="queue_list">
-      <FontAwesomeIcon icon={faHome} />
+    <div className="queue_list" style={{ padding: "20px" }}>
+      <h1>{office}</h1>
 
       <div className="jumbotron jumbotron-fluid">
         <div
@@ -103,7 +101,7 @@ function QueueList() {
             justifyContent: "flex-end",
           }}
         >
-          {" "}
+          <h1>{listNo + " studends pending"}</h1>{" "}
           <form className="form-inline" onSubmit={handleSearch}>
             <input
               className="form-control mr-sm-2"
@@ -149,8 +147,6 @@ function QueueList() {
                     <td>{value.year}</td>
 
                     <td>
-                      {value.status}
-                      <span></span>
                       <button
                         type="button"
                         className="btn btn-success"

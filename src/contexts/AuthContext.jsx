@@ -23,7 +23,7 @@ export function AuthProvider({ children }) {
 
   async function login(email, password) {
     // get user data from firebase
-    fetchCurrentUser(email);
+    // fetchCurrentUser(email);
     return auth.signInWithEmailAndPassword(email, password);
   }
   async function fetchCurrentUser(email) {
@@ -38,8 +38,6 @@ export function AuthProvider({ children }) {
         });
       });
     setLoading(false);
-
-    console.log(userData.role);
   }
 
   function logout() {

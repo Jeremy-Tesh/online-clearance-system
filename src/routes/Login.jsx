@@ -22,8 +22,8 @@ export default function Login() {
       setError("");
       setLoading(true);
       await login(emailRef.current.value, passwordRef.current.value);
-      history.push("/IndexRoute");
-    } catch {
+      // history.push("/IndexRoute");
+    } catch (err) {
       setError("Failed to log in");
     }
 
@@ -31,26 +31,46 @@ export default function Login() {
   }
 
   return (
-    <Container>
-      <Card>
+    <Container
+      style={{
+        height: "80vh",
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+        maxWidth: "450px",
+        flexDirection: "column",
+      }}
+    >
+      <h3>AASTU Online Clearance</h3>
+      <Card
+        style={{
+          width: "100%",
+          display: "flex",
+          padding: "30px",
+          justifyContent: "center",
+        }}
+      >
         <Card.Body>
-          <h2 className="text-center mb-4">Log In</h2>
+          <h2 className="text mb-4">Log-in</h2>
+          <Card.Header></Card.Header>
           {error && <Alert variant="danger">{error}</Alert>}
           <Form onSubmit={handleSubmit}>
-            <Form.Group id="email">
+            <Form.Group id="email" style={{ paddingTop: "20px" }}>
               <Form.Label>Email</Form.Label>
               <Form.Control type="email" ref={emailRef} required />
             </Form.Group>
-            <Form.Group id="password">
+            <Form.Group id="password" style={{ paddingTop: "20px" }}>
               <Form.Label>Password</Form.Label>
               <Form.Control type="password" ref={passwordRef} required />
             </Form.Group>
-            <Button disabled={loading} className="w-100" type="submit">
-              Log In
-            </Button>
+            <div style={{ paddingTop: "20px" }}>
+              <Button disabled={loading} className="w-100" type="submit">
+                Log In
+              </Button>
+            </div>
           </Form>
           <div className="w-100 text-center mt-3">
-            <Link to="/forgot-password">Forgot Password?</Link>
+            <Link to="/signup">Create New Account</Link>
           </div>
         </Card.Body>
       </Card>

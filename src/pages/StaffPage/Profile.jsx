@@ -13,22 +13,17 @@ const Profile = () => {
     userData: { fname, mname, email, status, department, office, id },
   } = useAuth();
 
-  useEffect(() => {
-    // fetchUserProfile();
-  }, []);
-
-  // async function fetchUserProfile() {
-  //   await db
-  //     .collection("students")
-
-  //     .get()
-  //     .then((snapshot) => {
-  //       snapshot.forEach((doc) => {
-  //         if (doc.data().email === email) doc.data();
-  //       });
-  //     });
-  // }
-
+  // const fetchUserProfile = async () => {
+  //   const response = db.collection("students");
+  //   const data = await response.get();
+  //   data.docs.forEach((item) => {
+  //     setUserInfo((arr) => [...arr, item.data()]);
+  //   });
+  // };
+  // console.log(userInfo);
+  // useEffect(() => {
+  //   fetchUserProfile();
+  // }, []);
   return (
     <div className="profile_container">
       <div className="profile_sub">
