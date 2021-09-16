@@ -1,11 +1,10 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 import ProgressBar from "./ProgressBar";
 import "./Progress.css";
 
 const Progress = ({ x }) => {
-  console.log(x);
-  const [progress, setProgress] = useState(x);
+  const [progress, setProgress] = useState(0);
   const [color, setColor] = useState("#4ac9bc");
   const colorArray = [
     "#7ea9e1",
@@ -27,6 +26,10 @@ const Progress = ({ x }) => {
   //   setColor(randomProgressColor);
   // };
 
+  useEffect(() => {
+    setProgress(x);
+  }, [x]);
+
   const onChange = (e) => {
     if (e.target.value) {
       if (e.target.value > 100) {
@@ -35,7 +38,7 @@ const Progress = ({ x }) => {
       if (e.target.value < 0) {
         progress = 0;
       }
-      setProgress(progress);
+      // setProgress(progress);
       const randomProgressColor = randomColor();
       setColor(randomProgressColor);
     } else {

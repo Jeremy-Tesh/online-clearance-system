@@ -172,6 +172,7 @@ const ClearanceForm = () => {
                   setReason(e.target.value);
                 }}
               />
+              <span></span>
               Graduation
             </Form.Label>
             <Form.Label>
@@ -181,6 +182,7 @@ const ClearanceForm = () => {
                 type="radio"
                 onChange={(e) => setReason(e.target.value)}
               />
+              <span></span>
               End of Semester/Academic Year
             </Form.Label>
             <Form.Label>
@@ -190,6 +192,7 @@ const ClearanceForm = () => {
                 type="radio"
                 onChange={(e) => setReason(e.target.value)}
               />
+              <span></span>
               Withdrawal Personal Reason
             </Form.Label>
             <Form.Label>
@@ -199,6 +202,7 @@ const ClearanceForm = () => {
                 type="radio"
                 onChange={(e) => setReason(e.target.value)}
               />
+              <span></span>
               Withdrawal Academic Reason
             </Form.Label>
             <Form.Label>
@@ -208,6 +212,7 @@ const ClearanceForm = () => {
                 type="radio"
                 onChange={(e) => setReason(e.target.value)}
               />
+              <span></span>
               Forced Withdrawal
             </Form.Label>
             <Form.Label>
@@ -217,6 +222,7 @@ const ClearanceForm = () => {
                 type="radio"
                 onChange={(e) => setReason(e.target.value)}
               />
+              <span></span>
               Dropout
             </Form.Label>
           </Row>

@@ -8,11 +8,14 @@ function QueueList() {
   const [search, setSearch] = useState([]);
   const [listNo, setlistNo] = useState();
   const {
-    userData: { office, status },
+    userData: { office },
   } = useAuth();
   var [values, setValues] = useState([]);
-  const [key, setKey] = useState();
-  console.log(office);
+
+  useEffect(() => {
+    fetchTable();
+  }, []);
+
   const fetchTable = async () => {
     await db
       .collection("students")
@@ -28,23 +31,42 @@ function QueueList() {
         setlistNo(snapshot.size);
       });
   };
+  const handleDecline = async (stu) => {
+    let docId;
+    try {
+      await db
+        .collection("students")
+        .get()
+        .then((q) => {
+          q.docs.forEach((item) => {
+            if (item.data().email === stu.email) docId = item.id;
+          });
+          console.log(docId);
+        });
 
-  useEffect(() => {
-    fetchTable();
-  }, []);
+      await db
+        .collection("students")
+        .doc(docId)
+        .update({ office: "canceled" })
+        .then(() => {
+          console.log("Document successfully written!");
+          fetchTable();
+        })
+        .catch((error) => {
+          console.error("Error writing document: ", error);
+        });
+    } catch (error) {}
+  };
 
   const obj = { department: "library", library: "sport", sport: "dorm" };
 
   const handleClick = async (student) => {
-    // upadte using student.id
-    // fetchTabel()
     try {
       let docId;
       await db
         .collection("students")
         .get()
         .then((q) => {
-          // console.log("docs", q.docs);
           q.docs.forEach((item) => {
             if (item.data().email === student.email) {
               docId = item.id;
@@ -55,7 +77,7 @@ function QueueList() {
       await db
         .collection("students")
         .doc(docId)
-        .update({ office: obj[student.office], status: student.status + 33 })
+        .update({ office: obj[student.office], status: student.status + 34 })
         .then(() => {
           console.log("Document successfully written!");
           fetchTable();
@@ -63,12 +85,7 @@ function QueueList() {
         .catch((error) => {
           console.error("Error writing document: ", error);
         });
-
-      // .where("email", "==", value.email);
-      // console.log("student ", student);
     } catch (error) {}
-    console.log("clicked");
-    console.log(values.office);
   };
 
   const handleSearch = (e) => {
@@ -155,13 +172,11 @@ function QueueList() {
                         Approve
                       </button>
                       <span></span>
-                      {/* <a className="btn text-primary">
-                        <i className="fas fa-check-circle"></i>
-                      </a> */}
+
                       <button
                         type="button"
                         className="btn btn-danger btn-group-sm"
-                        // onClick={() => handleDecline(value)}
+                        onClick={() => handleDecline(value)}
                       >
                         Decline
                       </button>

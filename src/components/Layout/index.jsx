@@ -32,7 +32,7 @@ const Layout = ({ children }) => {
       {
         id: 3,
         name: "Notification",
-        path: "./dash",
+        path: "./notification",
         cName: "nav-text",
         icon: <IoIcons.IoMdNotificationsOutline />,
       },

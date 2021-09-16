@@ -15,7 +15,6 @@ function Navbar({ navItems }) {
   const showSidebar = () => setSidebar(!sidebar);
   const [error, setError] = useState("");
   const { logout } = useAuth();
-  const history = useHistory();
 
   const {
     userData: { role },
