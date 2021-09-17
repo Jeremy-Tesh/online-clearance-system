@@ -9,7 +9,7 @@ const Dashboard = () => {
     userData: { fname, name, office, email },
   } = useAuth();
   return (
-    <div>
+    <div style={{ paddingLeft: "20%", paddingTop: "60px" }}>
       <div className="officer-header">
         <i className="fas fa-user fa-5x"></i>
         {/* <img src={avatar} alt="avatar" /> */}
@@ -56,10 +56,6 @@ const Dashboard = () => {
         </Card>
         <br />
       </div>
-
-      <h1>{office}</h1>
-
-      <span>{email}</span>
     </div>
   );
 };

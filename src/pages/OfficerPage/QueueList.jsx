@@ -58,7 +58,13 @@ function QueueList() {
     } catch (error) {}
   };
 
-  const obj = { department: "library", library: "sport", sport: "dorm" };
+  const obj = {
+    department: "library",
+    library: "sport",
+    sport: "dorm",
+    dorm: "done",
+    hr: "sport",
+  };
 
   const handleClick = async (student) => {
     try {
@@ -77,7 +83,10 @@ function QueueList() {
       await db
         .collection("students")
         .doc(docId)
-        .update({ office: obj[student.office], status: student.status + 34 })
+        .update({
+          office: obj[student.office],
+          status: student.status + 25,
+        })
         .then(() => {
           console.log("Document successfully written!");
           fetchTable();

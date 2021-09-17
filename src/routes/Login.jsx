@@ -35,6 +35,7 @@ export default function Login() {
         alignItems: "center",
         maxWidth: "450px",
         flexDirection: "column",
+        backgroundImage: `url("https://www.google.com/url?sa=i&url=https%3A%2F%2Fen.wikipedia.org%2Fwiki%2FImage&psig=AOvVaw37mNTvOdvCN_oKGk4G13_y&ust=1631953830409000&source=images&cd=vfe&ved=0CAsQjRxqFwoTCOjzgvXLhfMCFQAAAAAdAAAAABAD")`,
       }}
     >
       <h3>AASTU Online Clearance</h3>

@@ -24,7 +24,7 @@ const Registration = () => {
 
     try {
       await signUp(data.email, data.password);
-      db.collection("users").add(data);
+      await db.collection("users").add(data);
       alert("SUCCESSFUL");
     } catch (error) {
       alert(error);

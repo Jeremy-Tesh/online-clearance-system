@@ -34,8 +34,6 @@ const Property = () => {
           setpropertyData({});
         }
       });
-
-    console.log(listNo);
   }
 
   useEffect(() => {
@@ -43,7 +41,6 @@ const Property = () => {
   }, []);
 
   const addOrEdit = (obj) => {
-    console.log(obj);
     if (currentId == "") {
       firebaseDb.child("property-info").push(obj, (err) => {
         if (err) console.log(err);

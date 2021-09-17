@@ -94,15 +94,9 @@ const Layout = ({ children }) => {
         icon: <AiIcons.AiFillDashboard />,
         cName: "nav-text",
       },
+
       {
         id: 2,
-        name: "Profile",
-        path: "/profile",
-        icon: <CgIcons.CgProfile />,
-        cName: "nav-text",
-      },
-      {
-        id: 3,
         name: "Register officer",
         path: "/registration",
         cName: "nav-text",

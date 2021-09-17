@@ -7,14 +7,34 @@ import { useAuth } from "../../contexts/AuthContext";
 
 const ClearanceForm = () => {
   const {
-    userData: { fname, mname, lname, email, id },
+    userData: { fname, mname, lname, email, id, role },
   } = useAuth();
 
-  // const [fname, setFname] = useState("");
-  // const [lname, setLname] = useState("");
-  // const [mname, setMname] = useState("");
-  // const [id, setId] = useState("");
-  // const [email, setEmail] = useState("");
+  // if (role === "student") {
+  //   setOffice("department");
+  // } else if (role === "staff") setOffice("hr");
+  // const  {
+  //   office: "",
+  // }=data
+
+  // const roleBased = () => {
+  //   switch (role) {
+  //     case "student":
+  //       data.office = "department";
+  //       break;
+  //     case "staff":
+  //       data.office = "hr";
+  //       break;
+  //     default:
+  //       setOff("null");
+  //   }
+  //   return roleBased;
+  // };
+
+  // useEffect(() => {
+  //   roleBased();
+  // }, []);
+
   const [department, setDepartment] = useState("");
   const [section, setSection] = useState("");
   const [year, setYear] = useState("");
