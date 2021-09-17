@@ -42,10 +42,11 @@ const ClearanceForm = () => {
   const [reason, setReason] = useState("");
   const [status, setStatus] = useState(0);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
-    db.collection("students")
+    await db
+      .collection("students")
       .add({
         fname: fname,
         lname: lname,

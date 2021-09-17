@@ -3,6 +3,7 @@ import { Form, Button, Card, Alert } from "react-bootstrap";
 import { useAuth } from "../contexts/AuthContext";
 import { Link } from "react-router-dom";
 import { Container } from "react-bootstrap";
+import background from "./bg.jpg";
 
 export default function Login() {
   const emailRef = useRef();
@@ -29,48 +30,71 @@ export default function Login() {
   return (
     <Container
       style={{
-        height: "80vh",
+        backgroundImage: "url(" + background + ")",
+        backgroundRepeat: "no-repeat",
+        backgroundSize: "cover",
+        width: "100%",
+        height: "100vh",
         display: "flex",
         justifyContent: "center",
         alignItems: "center",
-        maxWidth: "450px",
-        flexDirection: "column",
-        backgroundImage: `url("https://www.google.com/url?sa=i&url=https%3A%2F%2Fen.wikipedia.org%2Fwiki%2FImage&psig=AOvVaw37mNTvOdvCN_oKGk4G13_y&ust=1631953830409000&source=images&cd=vfe&ved=0CAsQjRxqFwoTCOjzgvXLhfMCFQAAAAAdAAAAABAD")`,
+        maxWidth: "100%",
       }}
     >
-      <h3>AASTU Online Clearance</h3>
-      <Card
+      <div
         style={{
-          width: "100%",
+          height: "80vh",
           display: "flex",
-          padding: "30px",
           justifyContent: "center",
+          alignItems: "center",
+          maxWidth: "650px",
+          flexDirection: "column",
         }}
       >
-        <Card.Body>
-          <h2 className="text mb-4">Log-in</h2>
-          <Card.Header></Card.Header>
-          {error && <Alert variant="danger">{error}</Alert>}
-          <Form onSubmit={handleSubmit}>
-            <Form.Group id="email" style={{ paddingTop: "20px" }}>
-              <Form.Label>Email</Form.Label>
-              <Form.Control type="email" ref={emailRef} required />
-            </Form.Group>
-            <Form.Group id="password" style={{ paddingTop: "20px" }}>
-              <Form.Label>Password</Form.Label>
-              <Form.Control type="password" ref={passwordRef} required />
-            </Form.Group>
-            <div style={{ paddingTop: "20px" }}>
-              <Button disabled={loading} className="w-100" type="submit">
-                Log In
-              </Button>
+        <h1
+          style={{
+            color: "#6c6977",
+            textDecoration: "none",
+            fontWeight: "bold",
+          }}
+        >
+          AASTU ONLINE CLEARANCE
+        </h1>
+        <br></br>
+        <Card
+          style={{
+            width: "100%",
+            display: "flex",
+            padding: "30px",
+            justifyContent: "center",
+            boxShadow: " 0 0 14px 7px black",
+          }}
+        >
+          <Card.Body>
+            <h2 className="text mb-4">Login</h2>
+            <Card.Header></Card.Header>
+            {error && <Alert variant="danger">{error}</Alert>}
+            <Form onSubmit={handleSubmit}>
+              <Form.Group id="email" style={{ paddingTop: "20px" }}>
+                <Form.Label>Email</Form.Label>
+                <Form.Control type="email" ref={emailRef} required />
+              </Form.Group>
+              <Form.Group id="password" style={{ paddingTop: "20px" }}>
+                <Form.Label>Password</Form.Label>
+                <Form.Control type="password" ref={passwordRef} required />
+              </Form.Group>
+              <div style={{ paddingTop: "20px" }}>
+                <Button disabled={loading} className="w-100" type="submit">
+                  Log In
+                </Button>
+              </div>
+            </Form>
+            <div className="w-100 text-center mt-3">
+              <Link to="/signup">Create New Account</Link>
             </div>
-          </Form>
-          <div className="w-100 text-center mt-3">
-            <Link to="/signup">Create New Account</Link>
-          </div>
-        </Card.Body>
-      </Card>
+          </Card.Body>
+        </Card>
+      </div>
     </Container>
   );
 }
